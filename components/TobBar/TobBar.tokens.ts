@@ -1,6 +1,6 @@
 /**
- * Extracted from Figma file fnNtGRmLq725iOJ9IfngGG (Nav Bar, node 201:16).
- * Source variants: 201:62, 201:65, 201:174, 201:201, 201:223.
+ * Verified via Figma REST API — file 01IsSXHltfUiM8fAQvXgAj (2026-05-28).
+ * Component set Nav Bar (201:16); variants 201:62, 201:65, 201:174, 201:201, 201:223.
  */
 export const TOBBAR_TOKENS = {
   accentColor: '#F9627D',
@@ -24,13 +24,20 @@ export const TOBBAR_TOKENS = {
     fontWeight: '400' as const,
     letterSpacing: -0.43,
   },
-  chevron: {
-    width: 11,
-    height: 20,
-    strokeWidth: 2.5,
+  backChevron: {
+    fontSize: 20,
+    lineHeight: 25,
+    fontWeight: '600' as const,
+    letterSpacing: 0.36,
+    width: 16,
+    height: 25,
   },
   plusIcon: {
-    size: 17,
-    strokeWidth: 1.35,
+    fontSize: 17,
+    lineHeight: 22,
+    fontWeight: '400' as const,
+    letterSpacing: -0.43,
+    width: 18,
+    height: 22,
   },
 } as const;

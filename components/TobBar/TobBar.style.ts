@@ -29,20 +29,24 @@ export default StyleSheet.create({
   sideWithPadding: {
     paddingHorizontal: TOBBAR_TOKENS.sidePadding,
   },
-  centerSection: {
-    flexShrink: 0,
-    height: BAR_HEIGHT,
-    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   rightWithActions: {
     justifyContent: 'flex-end',
-    paddingLeft: TOBBAR_TOKENS.sidePadding,
     paddingRight: TOBBAR_TOKENS.rightEdgePadding,
     gap: TOBBAR_TOKENS.actionGap,
   },
+  rightWithActionsAndBack: {
+    paddingLeft: TOBBAR_TOKENS.sidePadding,
+  },
+  titleOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none',
+  },
   title: {
+    width: '100%',
     fontSize: TOBBAR_TOKENS.title.fontSize,
     lineHeight: TOBBAR_TOKENS.title.lineHeight,
     fontWeight: TOBBAR_TOKENS.title.fontWeight,
@@ -58,8 +62,23 @@ export default StyleSheet.create({
   backButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    maxWidth: '100%',
+  },
+  backChevron: {
+    fontSize: TOBBAR_TOKENS.backChevron.fontSize,
+    lineHeight: TOBBAR_TOKENS.backChevron.lineHeight,
+    fontWeight: TOBBAR_TOKENS.backChevron.fontWeight,
+    letterSpacing: TOBBAR_TOKENS.backChevron.letterSpacing,
+    color: TOBBAR_TOKENS.accentColor,
+    marginRight: 0,
+    ...Platform.select({
+      android: {
+        includeFontPadding: false,
+      },
+    }),
   },
   backTitle: {
+    flexShrink: 1,
     fontSize: TOBBAR_TOKENS.backTitle.fontSize,
     lineHeight: TOBBAR_TOKENS.backTitle.lineHeight,
     fontWeight: TOBBAR_TOKENS.backTitle.fontWeight,

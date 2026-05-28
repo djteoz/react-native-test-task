@@ -1,5 +1,5 @@
-import React, {FC, useCallback, useState} from 'react';
-import {LayoutChangeEvent, Pressable, Text, View} from 'react-native';
+import React, {FC, useCallback} from 'react';
+import {Pressable, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -11,22 +11,10 @@ export const TobBar: FC<ITobBarController> = (props) => {
   const {title, backTitle, onBackPress, buttons = []} = props;
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
-  const [leftWidth, setLeftWidth] = useState(0);
-  const [rightWidth, setRightWidth] = useState(0);
 
   const hasBack = Boolean(backTitle);
   const hasActions = buttons.length > 0;
   const isTitleOnly = !hasBack && !hasActions;
-
-  const handleLeftLayout = useCallback((event: LayoutChangeEvent) => {
-    setLeftWidth(event.nativeEvent.layout.width);
-  }, []);
-
-  const handleRightLayout = useCallback((event: LayoutChangeEvent) => {
-    setRightWidth(event.nativeEvent.layout.width);
-  }, []);
-
-  const titleInset = Math.max(leftWidth, rightWidth);
 
   const handleBackPress = useCallback(() => {
     if (onBackPress) {
@@ -58,9 +46,7 @@ export const TobBar: FC<ITobBarController> = (props) => {
   return (
     <View style={[styles.container, {paddingTop}]}>
       <View style={styles.bar}>
-        <View
-          onLayout={handleLeftLayout}
-          style={[styles.sideFlex, hasBack && styles.sideWithPadding]}>
+        <View style={[styles.sideFlex, hasBack && styles.sideWithPadding]}>
           {hasBack ? (
             <Pressable
               accessibilityRole="button"
@@ -75,8 +61,13 @@ export const TobBar: FC<ITobBarController> = (props) => {
           ) : null}
         </View>
 
+        <View style={styles.centerSection}>
+          <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
+            {title}
+          </Text>
+        </View>
+
         <View
-          onLayout={handleRightLayout}
           style={[
             styles.sideFlex,
             hasActions && styles.rightWithActions,
@@ -92,12 +83,6 @@ export const TobBar: FC<ITobBarController> = (props) => {
               <Icon name={button.iconName} />
             </Pressable>
           ))}
-        </View>
-
-        <View style={[styles.titleOverlay, {left: titleInset, right: titleInset}]}>
-          <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-            {title}
-          </Text>
         </View>
       </View>
     </View>

@@ -14,6 +14,8 @@ export const Icon: FC<IIconProps> = ({name: _name, color = TOBBAR_TOKENS.accentC
 
 const styles = StyleSheet.create({
   plusIcon: {
+    width: TOBBAR_TOKENS.plusIcon.width,
+    height: TOBBAR_TOKENS.plusIcon.height,
     fontSize: TOBBAR_TOKENS.plusIcon.fontSize,
     lineHeight: TOBBAR_TOKENS.plusIcon.lineHeight,
     fontWeight: TOBBAR_TOKENS.plusIcon.fontWeight,

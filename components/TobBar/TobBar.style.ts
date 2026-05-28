@@ -37,16 +37,14 @@ export default StyleSheet.create({
   rightWithActionsAndBack: {
     paddingLeft: TOBBAR_TOKENS.sidePadding,
   },
-  titleOverlay: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
+  centerSection: {
+    flexShrink: 0,
+    height: BAR_HEIGHT,
+    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
     alignItems: 'center',
     justifyContent: 'center',
-    pointerEvents: 'none',
   },
   title: {
-    width: '100%',
     fontSize: TOBBAR_TOKENS.title.fontSize,
     lineHeight: TOBBAR_TOKENS.title.lineHeight,
     fontWeight: TOBBAR_TOKENS.title.fontWeight,
@@ -65,6 +63,8 @@ export default StyleSheet.create({
     maxWidth: '100%',
   },
   backChevron: {
+    width: TOBBAR_TOKENS.backChevron.width,
+    height: TOBBAR_TOKENS.backChevron.height,
     fontSize: TOBBAR_TOKENS.backChevron.fontSize,
     lineHeight: TOBBAR_TOKENS.backChevron.lineHeight,
     fontWeight: TOBBAR_TOKENS.backChevron.fontWeight,

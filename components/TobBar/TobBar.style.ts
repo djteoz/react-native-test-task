@@ -1,75 +1,79 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
-export const BAR_HEIGHT = 44;
+import {TOBBAR_TOKENS} from './TobBar.tokens';
+
+export const BAR_HEIGHT = TOBBAR_TOKENS.barHeight;
 export const DEFAULT_TOP_INSET = 20;
-export const ACCENT_COLOR = '#F9627D';
-export const SIDE_PADDING = 16;
-export const RIGHT_EDGE_PADDING = 3;
-export const ACTION_GAP = 3;
-export const ACTION_BUTTON_SIZE = 44;
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: TOBBAR_TOKENS.backgroundColor,
   },
   bar: {
     height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  leftSection: {
+  titleOnlySection: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    minHeight: BAR_HEIGHT,
-    paddingHorizontal: SIDE_PADDING,
-  },
-  centerSection: {
-    flexShrink: 1,
-    minWidth: 0,
-    paddingHorizontal: SIDE_PADDING,
+    height: BAR_HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  rightSection: {
+  sideFlex: {
     flex: 1,
+    height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  sideWithPadding: {
+    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
+  },
+  centerSection: {
+    flexShrink: 0,
+    height: BAR_HEIGHT,
+    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightWithActions: {
     justifyContent: 'flex-end',
-    minHeight: BAR_HEIGHT,
-    gap: ACTION_GAP,
-    paddingLeft: SIDE_PADDING,
-    paddingRight: RIGHT_EDGE_PADDING,
+    paddingLeft: TOBBAR_TOKENS.sidePadding,
+    paddingRight: TOBBAR_TOKENS.rightEdgePadding,
+    gap: TOBBAR_TOKENS.actionGap,
   },
   title: {
-    fontSize: 17,
-    lineHeight: 22,
-    fontWeight: '600',
-    letterSpacing: -0.43,
-    color: '#000000',
+    fontSize: TOBBAR_TOKENS.title.fontSize,
+    lineHeight: TOBBAR_TOKENS.title.lineHeight,
+    fontWeight: TOBBAR_TOKENS.title.fontWeight,
+    letterSpacing: TOBBAR_TOKENS.title.letterSpacing,
+    color: TOBBAR_TOKENS.titleColor,
     textAlign: 'center',
+    ...Platform.select({
+      android: {
+        includeFontPadding: false,
+      },
+    }),
   },
   backButton: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  backChevron: {
-    fontSize: 20,
-    lineHeight: 25,
-    fontWeight: '600',
-    letterSpacing: 0.36,
-    color: ACCENT_COLOR,
-  },
   backTitle: {
-    fontSize: 17,
-    lineHeight: 22,
-    fontWeight: '400',
-    letterSpacing: -0.43,
-    color: ACCENT_COLOR,
+    fontSize: TOBBAR_TOKENS.backTitle.fontSize,
+    lineHeight: TOBBAR_TOKENS.backTitle.lineHeight,
+    fontWeight: TOBBAR_TOKENS.backTitle.fontWeight,
+    letterSpacing: TOBBAR_TOKENS.backTitle.letterSpacing,
+    color: TOBBAR_TOKENS.accentColor,
+    ...Platform.select({
+      android: {
+        includeFontPadding: false,
+      },
+    }),
   },
   actionButton: {
-    width: ACTION_BUTTON_SIZE,
-    height: ACTION_BUTTON_SIZE,
+    width: TOBBAR_TOKENS.actionButtonSize,
+    height: TOBBAR_TOKENS.actionButtonSize,
     alignItems: 'center',
     justifyContent: 'center',
   },

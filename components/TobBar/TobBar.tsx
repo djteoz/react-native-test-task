@@ -3,7 +3,7 @@ import {Pressable, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {Icon} from './Icon';
+import {ChevronLeftIcon, Icon} from './Icon';
 import styles, {DEFAULT_TOP_INSET} from './TobBar.style';
 import {ITobBarController} from './TobBar.model';
 
@@ -11,6 +11,10 @@ export const TobBar: FC<ITobBarController> = (props) => {
   const {title, backTitle, onBackPress, buttons = []} = props;
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
+
+  const hasBack = Boolean(backTitle);
+  const hasActions = buttons.length > 0;
+  const isTitleOnly = !hasBack && !hasActions;
 
   const handleBackPress = useCallback(() => {
     if (onBackPress) {
@@ -25,17 +29,31 @@ export const TobBar: FC<ITobBarController> = (props) => {
 
   const paddingTop = top > 0 ? top : DEFAULT_TOP_INSET;
 
+  if (isTitleOnly) {
+    return (
+      <View style={[styles.container, {paddingTop}]}>
+        <View style={styles.bar}>
+          <View style={styles.titleOnlySection}>
+            <Text numberOfLines={1} style={styles.title}>
+              {title}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={[styles.container, {paddingTop}]}>
       <View style={styles.bar}>
-        <View style={styles.leftSection}>
-          {backTitle ? (
+        <View style={[styles.sideFlex, hasBack && styles.sideWithPadding]}>
+          {hasBack ? (
             <Pressable
               accessibilityRole="button"
               hitSlop={8}
               onPress={handleBackPress}
               style={styles.backButton}>
-              <Text style={styles.backChevron}>{'\u2039'}</Text>
+              <ChevronLeftIcon />
               <Text numberOfLines={1} style={styles.backTitle}>
                 {backTitle}
               </Text>
@@ -49,7 +67,7 @@ export const TobBar: FC<ITobBarController> = (props) => {
           </Text>
         </View>
 
-        <View style={styles.rightSection}>
+        <View style={[styles.sideFlex, hasActions && styles.rightWithActions]}>
           {buttons.map((button, index) => (
             <Pressable
               accessibilityRole="button"

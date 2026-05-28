@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const BAR_HEIGHT = 44;
 export const DEFAULT_TOP_INSET = 20;
+export const MIN_TITLE_INSET = 16;
 
 export default StyleSheet.create({
   container: {
@@ -24,15 +25,20 @@ export default StyleSheet.create({
   rightSection: {
     justifyContent: 'flex-end',
   },
+  sideContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   titleContainer: {
     position: 'absolute',
-    left: 72,
-    right: 72,
+    top: 0,
+    bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
     pointerEvents: 'none',
   },
   title: {
+    width: '100%',
     fontSize: 17,
     fontWeight: '600',
     color: '#000000',

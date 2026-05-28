@@ -10,17 +10,17 @@ const showActionAlert = (action: string) => {
 export const TestScreen = () => {
   return (
     <ScrollView style={styles.container}>
-      <TobBar title="Title only" />
+      <TobBar title="Title" />
 
       <View style={styles.spacer} />
 
-      <TobBar backTitle="Parent Title" onBackPress={() => showActionAlert('Back pressed')} title="Title + back" />
+      <TobBar backTitle="Parent Title" onBackPress={() => showActionAlert('Back pressed')} title="Title" />
 
       <View style={styles.spacer} />
 
       <TobBar
         buttons={[{iconName: 'share', onPress: () => showActionAlert('Share pressed')}]}
-        title="Title + 1 action"
+        title="Title"
       />
 
       <View style={styles.spacer} />
@@ -29,7 +29,7 @@ export const TestScreen = () => {
         backTitle="Parent Title"
         buttons={[{iconName: 'edit', onPress: () => showActionAlert('Edit pressed')}]}
         onBackPress={() => showActionAlert('Back pressed')}
-        title="Title + back + 1 action"
+        title="Title"
       />
 
       <View style={styles.spacer} />
@@ -42,7 +42,7 @@ export const TestScreen = () => {
           {iconName: 'more', onPress: () => showActionAlert('More pressed')},
         ]}
         onBackPress={() => showActionAlert('Back pressed')}
-        title="Title + back + 3 actions"
+        title="Title"
       />
     </ScrollView>
   );

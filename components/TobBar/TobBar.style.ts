@@ -2,9 +2,11 @@ import {StyleSheet} from 'react-native';
 
 export const BAR_HEIGHT = 44;
 export const DEFAULT_TOP_INSET = 20;
-export const MIN_TITLE_INSET = 16;
-export const ACCENT_COLOR = '#FF453A';
-export const HORIZONTAL_PADDING = 16;
+export const ACCENT_COLOR = '#F9627D';
+export const SIDE_PADDING = 16;
+export const RIGHT_EDGE_PADDING = 3;
+export const ACTION_GAP = 3;
+export const ACTION_BUTTON_SIZE = 44;
 
 export default StyleSheet.create({
   container: {
@@ -14,60 +16,60 @@ export default StyleSheet.create({
     height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: HORIZONTAL_PADDING,
   },
-  sideSection: {
+  leftSection: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    minWidth: MIN_TITLE_INSET,
+    minHeight: BAR_HEIGHT,
+    paddingHorizontal: SIDE_PADDING,
   },
-  rightSection: {
-    justifyContent: 'flex-end',
-  },
-  sideContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  titleContainer: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
+  centerSection: {
+    flexShrink: 1,
+    minWidth: 0,
+    paddingHorizontal: SIDE_PADDING,
     alignItems: 'center',
     justifyContent: 'center',
-    pointerEvents: 'none',
+  },
+  rightSection: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    minHeight: BAR_HEIGHT,
+    gap: ACTION_GAP,
+    paddingLeft: SIDE_PADDING,
+    paddingRight: RIGHT_EDGE_PADDING,
   },
   title: {
-    width: '100%',
     fontSize: 17,
     lineHeight: 22,
     fontWeight: '600',
+    letterSpacing: -0.43,
     color: '#000000',
     textAlign: 'center',
   },
   backButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: BAR_HEIGHT,
-    marginLeft: -4,
-    paddingRight: 4,
   },
   backChevron: {
-    fontSize: 24,
-    lineHeight: 24,
+    fontSize: 20,
+    lineHeight: 25,
+    fontWeight: '600',
+    letterSpacing: 0.36,
     color: ACCENT_COLOR,
-    marginRight: 3,
-    marginTop: -1,
   },
   backTitle: {
     fontSize: 17,
     lineHeight: 22,
     fontWeight: '400',
+    letterSpacing: -0.43,
     color: ACCENT_COLOR,
   },
   actionButton: {
-    width: 28,
-    minHeight: BAR_HEIGHT,
+    width: ACTION_BUTTON_SIZE,
+    height: ACTION_BUTTON_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
   },

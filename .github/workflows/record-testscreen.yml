@@ -8,6 +8,9 @@ on:
       - '.github/workflows/record-testscreen.yml'
       - 'scripts/record-testscreen.sh'
 
+permissions:
+  contents: write
+
 jobs:
   record:
     runs-on: ubuntu-latest
@@ -56,3 +59,14 @@ jobs:
           name: testscreen-recording
           path: testscreen-recording.mp4
           if-no-files-found: warn
+
+      - name: Commit recording to repository
+        if: success()
+        run: |
+          mkdir -p docs/recordings
+          cp testscreen-recording.mp4 docs/recordings/testscreen-recording.mp4
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/recordings/testscreen-recording.mp4
+          git diff --staged --quiet || git commit -m "add TestScreen screen recording"
+          git push

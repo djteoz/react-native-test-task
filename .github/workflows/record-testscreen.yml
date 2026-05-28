@@ -53,6 +53,7 @@ jobs:
           arch: x86_64
           profile: pixel_6
           disable-spellchecker: true
+          emulator-options: -no-boot-anim -gpu swiftshader_indirect -noaudio
           script: bash ./scripts/record-testscreen.sh
 
       - name: Upload screen recording

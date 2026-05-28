@@ -8,7 +8,7 @@ launch_app() {
   adb shell am force-stop "$PACKAGE" >/dev/null 2>&1 || true
   adb shell input keyevent KEYCODE_BACK >/dev/null 2>&1 || true
   adb shell input tap 540 1450 >/dev/null 2>&1 || true
-  adb shell am start -W -S -n "$ACTIVITY" >/dev/null
+  adb shell am start -W -n "$ACTIVITY" >/dev/null
   sleep 7
 }
 

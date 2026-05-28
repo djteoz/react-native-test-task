@@ -3,24 +3,24 @@ import {StyleSheet} from 'react-native';
 export const BAR_HEIGHT = 44;
 export const DEFAULT_TOP_INSET = 20;
 export const MIN_TITLE_INSET = 16;
+export const ACCENT_COLOR = '#FF453A';
+export const HORIZONTAL_PADDING = 16;
 
 export default StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(60, 60, 67, 0.29)',
   },
   bar: {
     height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
+    paddingHorizontal: HORIZONTAL_PADDING,
   },
   sideSection: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    minWidth: 60,
+    minWidth: MIN_TITLE_INSET,
   },
   rightSection: {
     justifyContent: 'flex-end',
@@ -40,6 +40,7 @@ export default StyleSheet.create({
   title: {
     width: '100%',
     fontSize: 17,
+    lineHeight: 22,
     fontWeight: '600',
     color: '#000000',
     textAlign: 'center',
@@ -48,25 +49,26 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     minHeight: BAR_HEIGHT,
-    paddingHorizontal: 8,
+    marginLeft: -4,
+    paddingRight: 4,
   },
   backChevron: {
-    fontSize: 28,
-    lineHeight: 28,
-    color: '#007AFF',
-    marginRight: 2,
-    marginTop: -2,
+    fontSize: 24,
+    lineHeight: 24,
+    color: ACCENT_COLOR,
+    marginRight: 3,
+    marginTop: -1,
   },
   backTitle: {
     fontSize: 17,
+    lineHeight: 22,
     fontWeight: '400',
-    color: '#007AFF',
+    color: ACCENT_COLOR,
   },
   actionButton: {
-    minWidth: BAR_HEIGHT,
+    width: 28,
     minHeight: BAR_HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 4,
   },
 });

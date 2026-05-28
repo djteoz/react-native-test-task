@@ -14,7 +14,7 @@ export const TestScreen = () => {
 
       <View style={styles.spacer} />
 
-      <TobBar backTitle="Back" onBackPress={() => showActionAlert('Back pressed')} title="Title + back" />
+      <TobBar backTitle="Parent Title" onBackPress={() => showActionAlert('Back pressed')} title="Title + back" />
 
       <View style={styles.spacer} />
 
@@ -26,7 +26,7 @@ export const TestScreen = () => {
       <View style={styles.spacer} />
 
       <TobBar
-        backTitle="Back"
+        backTitle="Parent Title"
         buttons={[{iconName: 'edit', onPress: () => showActionAlert('Edit pressed')}]}
         onBackPress={() => showActionAlert('Back pressed')}
         title="Title + back + 1 action"
@@ -35,7 +35,7 @@ export const TestScreen = () => {
       <View style={styles.spacer} />
 
       <TobBar
-        backTitle="Back"
+        backTitle="Parent Title"
         buttons={[
           {iconName: 'add', onPress: () => showActionAlert('Add pressed')},
           {iconName: 'search', onPress: () => showActionAlert('Search pressed')},

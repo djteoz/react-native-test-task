@@ -1,15 +1,59 @@
-import {TobBar} from "../../components/TobBar/TobBar";
-import {ScrollView} from "react-native";
+import React from 'react';
+import {Alert, ScrollView, StyleSheet, View} from 'react-native';
+
+import {TobBar} from '../../components/TobBar/TobBar';
+
+const showActionAlert = (action: string) => {
+  Alert.alert('Action', action);
+};
 
 export const TestScreen = () => {
-
   return (
-    <ScrollView style={{flex: 1}}>
-      <TobBar title={'1 Topbar'} />
-      <TobBar title={'2 Topbar'} />
-      <TobBar title={'3 Topbar'} />
-      <TobBar title={'4 Topbar'} />
-      <TobBar title={'5 Topbar'} />
+    <ScrollView style={styles.container}>
+      <TobBar title="Title only" />
+
+      <View style={styles.spacer} />
+
+      <TobBar backTitle="Back" onBackPress={() => showActionAlert('Back pressed')} title="Title + back" />
+
+      <View style={styles.spacer} />
+
+      <TobBar
+        buttons={[{iconName: 'share', onPress: () => showActionAlert('Share pressed')}]}
+        title="Title + 1 action"
+      />
+
+      <View style={styles.spacer} />
+
+      <TobBar
+        backTitle="Back"
+        buttons={[{iconName: 'edit', onPress: () => showActionAlert('Edit pressed')}]}
+        onBackPress={() => showActionAlert('Back pressed')}
+        title="Title + back + 1 action"
+      />
+
+      <View style={styles.spacer} />
+
+      <TobBar
+        backTitle="Back"
+        buttons={[
+          {iconName: 'add', onPress: () => showActionAlert('Add pressed')},
+          {iconName: 'search', onPress: () => showActionAlert('Search pressed')},
+          {iconName: 'more', onPress: () => showActionAlert('More pressed')},
+        ]}
+        onBackPress={() => showActionAlert('Back pressed')}
+        title="Title + back + 3 actions"
+      />
     </ScrollView>
-  )
-}
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F2F2F7',
+  },
+  spacer: {
+    height: 24,
+  },
+});

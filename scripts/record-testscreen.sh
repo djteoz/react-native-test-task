@@ -7,19 +7,12 @@ ACTIVITY="${PACKAGE}/.MainActivity"
 launch_app() {
   adb shell am force-stop "$PACKAGE" >/dev/null 2>&1 || true
   adb shell input keyevent KEYCODE_BACK >/dev/null 2>&1 || true
-  adb shell input tap 540 1450 >/dev/null 2>&1 || true
   adb shell am start -W -n "$ACTIVITY" >/dev/null
-  sleep 7
-}
-
-capture_frame() {
-  local index="$1"
-  adb shell screencap -p "/sdcard/frame_${index}.png"
-  adb pull "/sdcard/frame_${index}.png" "frames/frame_$(printf '%02d' "$index").png" >/dev/null
+  sleep 8
 }
 
 echo "=== Bundling JS for Android ==="
-mkdir -p android/app/src/main/assets frames
+mkdir -p android/app/src/main/assets
 npx react-native bundle \
   --platform android \
   --dev false \
@@ -44,31 +37,39 @@ adb shell settings put global animator_duration_scale 0
 adb shell input keyevent KEYCODE_WAKEUP >/dev/null 2>&1 || true
 sleep 2
 
-echo "=== Launching app ==="
+echo "=== Launching app before recording ==="
 launch_app
 launch_app
 
 FOCUS=$(adb shell dumpsys window 2>/dev/null | grep -E 'mCurrentFocus|mFocusedApp' | head -1 || true)
 echo "Window focus: ${FOCUS}"
 
-echo "=== Capturing TestScreen frames ==="
-capture_frame 1
-sleep 1
+echo "=== Starting screen recording ==="
+adb shell screenrecord --time-limit 24 /data/local/tmp/testscreen.mp4 &
+RECORD_JOB=$!
+sleep 2
 
-for index in 2 3 4 5 6 7 8; do
+launch_app
+
+echo "=== Scrolling through TestScreen ==="
+for _ in 1 2 3 4 5; do
   adb shell input swipe 540 1800 540 500 700
-  sleep 1.6
-  capture_frame "$index"
+  sleep 1.4
 done
 
-echo "=== Building MP4 from screenshots ==="
-ffmpeg -y \
-  -framerate 1 \
-  -i frames/frame_%02d.png \
+echo "=== Waiting for screenrecord to finish ==="
+wait "$RECORD_JOB" || true
+sleep 2
+
+adb pull /data/local/tmp/testscreen.mp4 ./testscreen-recording-raw.mp4
+ls -lh ./testscreen-recording-raw.mp4
+
+echo "=== Re-encoding MP4 for Windows/browser compatibility ==="
+ffmpeg -y -i ./testscreen-recording-raw.mp4 \
   -c:v libx264 \
   -pix_fmt yuv420p \
   -movflags +faststart \
+  -an \
   ./testscreen-recording.mp4
 
 ls -lh ./testscreen-recording.mp4
-ffprobe -hide_banner ./testscreen-recording.mp4 2>&1 | head -20

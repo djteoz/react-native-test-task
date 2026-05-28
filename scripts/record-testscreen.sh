@@ -3,6 +3,7 @@ set -euo pipefail
 
 PACKAGE="com.saferegiontesttask"
 ACTIVITY="${PACKAGE}/.MainActivity"
+APK="android/app/build/outputs/apk/debug/app-debug.apk"
 
 launch_app() {
   adb shell am force-stop "$PACKAGE" >/dev/null 2>&1 || true
@@ -11,24 +12,17 @@ launch_app() {
   sleep 8
 }
 
-echo "=== Bundling JS for Android ==="
-mkdir -p android/app/src/main/assets
-npx react-native bundle \
-  --platform android \
-  --dev false \
-  --entry-file index.js \
-  --bundle-output android/app/src/main/assets/index.android.bundle \
-  --assets-dest android/app/src/main/res/
-
-echo "=== Building and installing APK ==="
-cd android
-./gradlew app:assembleDebug app:installDebug -PreactNativeArchitectures=x86_64 --no-daemon
-cd ..
-
 echo "=== Waiting for device ==="
 adb wait-for-device
 adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
-sleep 15
+sleep 10
+
+echo "=== Installing prebuilt APK ==="
+if [[ ! -f "$APK" ]]; then
+  echo "Missing APK at $APK"
+  exit 1
+fi
+adb install -r "$APK"
 
 echo "=== Preparing emulator ==="
 adb shell settings put global window_animation_scale 0

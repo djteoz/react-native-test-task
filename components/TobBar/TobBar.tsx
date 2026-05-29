@@ -14,7 +14,6 @@ export const TobBar: FC<ITobBarController> = (props) => {
 
   const hasBack = Boolean(backTitle);
   const hasActions = buttons.length > 0;
-  const isTitleOnly = !hasBack && !hasActions;
 
   const handleBackPress = useCallback(() => {
     if (onBackPress) {
@@ -29,24 +28,10 @@ export const TobBar: FC<ITobBarController> = (props) => {
 
   const paddingTop = top > 0 ? top : DEFAULT_TOP_INSET;
 
-  if (isTitleOnly) {
-    return (
-      <View style={[styles.container, {paddingTop}]}>
-        <View style={styles.bar}>
-          <View style={styles.titleOnlySection}>
-            <Text numberOfLines={1} style={styles.title}>
-              {title}
-            </Text>
-          </View>
-        </View>
-      </View>
-    );
-  }
-
   return (
     <View style={[styles.container, {paddingTop}]}>
       <View style={styles.bar}>
-        <View style={[styles.sideFlex, hasBack && styles.sideWithPadding]}>
+        <View style={[styles.leftControls, hasBack && styles.sideWithPadding]}>
           {hasBack ? (
             <Pressable
               accessibilityRole="button"
@@ -61,7 +46,7 @@ export const TobBar: FC<ITobBarController> = (props) => {
           ) : null}
         </View>
 
-        <View style={styles.centerSection}>
+        <View pointerEvents="none" style={styles.centerOverlay}>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
             {title}
           </Text>
@@ -69,7 +54,7 @@ export const TobBar: FC<ITobBarController> = (props) => {
 
         <View
           style={[
-            styles.sideFlex,
+            styles.rightControls,
             hasActions && styles.rightWithActions,
             hasActions && hasBack && styles.rightWithActionsAndBack,
           ]}>

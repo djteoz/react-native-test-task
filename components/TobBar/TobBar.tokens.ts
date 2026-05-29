@@ -11,6 +11,7 @@ export const TOBBAR_TOKENS = {
   sideSectionWidth: 153.5,
   centerSectionWidth: 68,
   sidePadding: 16,
+  centerSideGuard: 120,
   rightEdgePadding: 3,
   actionGap: 3,
   actionButtonSize: 44,

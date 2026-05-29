@@ -7,36 +7,44 @@ export const DEFAULT_TOP_INSET = 20;
 
 export default StyleSheet.create({
   container: {
-    width: TOBBAR_TOKENS.barWidth,
+    width: '100%',
     alignSelf: 'center',
     backgroundColor: TOBBAR_TOKENS.backgroundColor,
     overflow: 'hidden',
   },
   bar: {
-    width: TOBBAR_TOKENS.barWidth,
+    width: '100%',
     height: BAR_HEIGHT,
-    flexDirection: 'row',
-    alignItems: 'center',
+    position: 'relative',
     overflow: 'hidden',
   },
-  titleOnlySection: {
-    flex: 1,
-    height: BAR_HEIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  sideFlex: {
-    flex: 1,
+  leftControls: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '50%',
     height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: TOBBAR_TOKENS.sidePadding,
+    zIndex: 1,
   },
   sideWithPadding: {
     paddingHorizontal: TOBBAR_TOKENS.sidePadding,
   },
-  rightWithActions: {
+  rightControls: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    width: '50%',
+    height: BAR_HEIGHT,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'flex-end',
+    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
+    zIndex: 1,
+  },
+  rightWithActions: {
     paddingLeft: 0,
     paddingRight: TOBBAR_TOKENS.rightEdgePadding,
     gap: TOBBAR_TOKENS.actionGap,
@@ -44,11 +52,13 @@ export default StyleSheet.create({
   rightWithActionsAndBack: {
     paddingLeft: TOBBAR_TOKENS.sidePadding,
   },
-  centerSection: {
-    flexShrink: 0,
-    width: TOBBAR_TOKENS.centerSectionWidth,
+  centerOverlay: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
     height: BAR_HEIGHT,
-    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
+    paddingHorizontal: TOBBAR_TOKENS.centerSideGuard,
     alignItems: 'center',
     justifyContent: 'center',
   },

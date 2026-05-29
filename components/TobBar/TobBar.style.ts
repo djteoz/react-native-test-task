@@ -7,12 +7,17 @@ export const DEFAULT_TOP_INSET = 20;
 
 export default StyleSheet.create({
   container: {
+    width: TOBBAR_TOKENS.barWidth,
+    alignSelf: 'center',
     backgroundColor: TOBBAR_TOKENS.backgroundColor,
+    overflow: 'hidden',
   },
   bar: {
+    width: TOBBAR_TOKENS.barWidth,
     height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   titleOnlySection: {
     flex: 1,
@@ -25,12 +30,14 @@ export default StyleSheet.create({
     height: BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: TOBBAR_TOKENS.sidePadding,
   },
   sideWithPadding: {
     paddingHorizontal: TOBBAR_TOKENS.sidePadding,
   },
   rightWithActions: {
     justifyContent: 'flex-end',
+    paddingLeft: 0,
     paddingRight: TOBBAR_TOKENS.rightEdgePadding,
     gap: TOBBAR_TOKENS.actionGap,
   },
@@ -39,12 +46,15 @@ export default StyleSheet.create({
   },
   centerSection: {
     flexShrink: 0,
+    width: TOBBAR_TOKENS.centerSectionWidth,
     height: BAR_HEIGHT,
     paddingHorizontal: TOBBAR_TOKENS.sidePadding,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
+    width: TOBBAR_TOKENS.title.width,
+    height: TOBBAR_TOKENS.title.height,
     fontSize: TOBBAR_TOKENS.title.fontSize,
     lineHeight: TOBBAR_TOKENS.title.lineHeight,
     fontWeight: TOBBAR_TOKENS.title.fontWeight,
@@ -58,9 +68,10 @@ export default StyleSheet.create({
     }),
   },
   backButton: {
+    width: TOBBAR_TOKENS.backButton.width,
+    height: TOBBAR_TOKENS.backButton.height,
     flexDirection: 'row',
     alignItems: 'center',
-    maxWidth: '100%',
   },
   backChevron: {
     width: TOBBAR_TOKENS.backChevron.width,
@@ -78,7 +89,8 @@ export default StyleSheet.create({
     }),
   },
   backTitle: {
-    flexShrink: 1,
+    width: TOBBAR_TOKENS.backTitle.width,
+    height: TOBBAR_TOKENS.backTitle.height,
     fontSize: TOBBAR_TOKENS.backTitle.fontSize,
     lineHeight: TOBBAR_TOKENS.backTitle.lineHeight,
     fontWeight: TOBBAR_TOKENS.backTitle.fontWeight,

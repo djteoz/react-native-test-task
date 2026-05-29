@@ -3,7 +3,7 @@ import {Pressable, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {Icon} from './Icon';
+import {ChevronLeftIcon, Icon} from './Icon';
 import styles, {DEFAULT_TOP_INSET} from './TobBar.style';
 import {ITobBarController} from './TobBar.model';
 
@@ -53,7 +53,7 @@ export const TobBar: FC<ITobBarController> = (props) => {
               hitSlop={8}
               onPress={handleBackPress}
               style={styles.backButton}>
-              <Text style={styles.backChevron}>{'\u2039'}</Text>
+              <ChevronLeftIcon />
               <Text numberOfLines={1} style={styles.backTitle}>
                 {backTitle}
               </Text>

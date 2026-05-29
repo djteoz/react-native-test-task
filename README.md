@@ -5,6 +5,36 @@
 
 [рекомендации](docs/recommendations.md)
 
+## Выполнено
+
+### Задание №1: TobBar
+
+Компонент `TobBar` обновлён по макету iOS Nav Bar:
+
+- добавлена поддержка `safeArea.top` с fallback `20`;
+- кнопка назад обрабатывает навигацию внутри компонента и поддерживает кастомный `onBackPress`;
+- правые кнопки передаются массивом `buttons`;
+- `TestScreen` показывает 5 требуемых вариантов топбара;
+- заголовок центрируется независимо от back/action-кнопок, layout адаптирован под ширину устройства.
+
+Запись экрана: [docs/recordings/testscreen-recording.mp4](docs/recordings/testscreen-recording.mp4)
+
+### Задание №2: OptimizationList review
+
+Проведено ревью компонента `OptimizationList` с фокусом на оптимизацию React Native списка под 100+ элементов.
+
+Основные темы ревью:
+
+- замена `ScrollView + map` на `FlatList`;
+- стабильные ключи вместо `key={item.title}`;
+- оптимизация динамического элемента, зависящего от `value`;
+- использование `ListHeaderComponent` / `ListFooterComponent`, если элемент гарантированно первый или последний;
+- вынос стилей и моделей по рекомендациям проекта.
+
+Полный текст ревью: [docs/review-optimization-list.md](docs/review-optimization-list.md)
+
+## Исходное описание задания
+
 ## Задание №1
 
 изменить компонент TobBar по [макету](https://www.figma.com/design/NQBdYXvFxHjdarHImVga5X/iOS-Nav-Bar-Variants--Community-?node-id=201-71&t=FpYf9qqOQCzSFeIJ-0).
